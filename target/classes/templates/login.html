@@ -25,25 +25,26 @@
         <h1> Register </h1>
     </div>
 
-    <!-- <div class = "row">
+    <div class = "row">
         <div class = "col-lg-3">
             <a th:href = "@{/students/new}" class = "btn btn-primary btn-sm mb-3"> Login</a>
         </div>
-    </div> -->
+    </div>
 
     <form id="login-form">
         <label for="username-input">Username</label>
-        <input id="username-input" type="text" required/>
+        <input id="username-input" type="text"/>
         <label for="password-input">Password</label>
-        <input id="password-input" type="password" required/>
-        <button type="submit" lass="btn btn-primary btn-sm mb-3">Login</button>
+        <input id="password-input" type="password"/>
+        <button type="submit">Submit</button>
     </form>
     <a href="/register">No account? Register here.</a>
     <script>
         document.querySelector('#login-form').addEventListener('submit', async event => {
             event.preventDefault();
             const [username, password] = event.target;
-            const response = await fetch('/auth/signin', {
+            console.log({username, password})
+            const loginResult = await fetch('/auth/signin', {
                 method: 'POST',
                 body: JSON.stringify({
                     username: username.value,
@@ -53,11 +54,7 @@
                     'Content-Type': 'application/json'
                 }
             });
-            if (response.ok) {
-                window.location.href = '/students/new';
-            } else {
-                alert('Incorrect User Details ');
-            }
+            console.log({loginResult});
         })
     </script>
 
